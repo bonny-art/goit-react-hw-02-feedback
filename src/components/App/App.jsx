@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Statistics, FeedbackOptions } from 'components';
 
 export class App extends Component {
   state = {
@@ -17,35 +18,25 @@ export class App extends Component {
   countPositiveFeedbackPercentage = () =>
     Math.round(100 * (this.state.good / this.countTotalFeedback())) || 0;
 
-  statsKeys = Object.keys(this.state);
-
   render() {
     const totalFeedback = this.countTotalFeedback();
     const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+
+    const statsKeys = Object.keys(this.state);
+
     return (
       <div>
-        <h1>Please leave feedback</h1>
-        {this.statsKeys.map(statsKey => {
-          return (
-            <button
-              type="button"
-              key={statsKey}
-              onClick={() => this.countFeedback(statsKey)}
-            >
-              {statsKey}
-            </button>
-          );
-        })}
-        <h2>Statistics</h2>
-        {this.statsKeys.map(statsKey => {
-          return (
-            <p key={statsKey}>
-              {statsKey}: {this.state[statsKey]}
-            </p>
-          );
-        })}
-        <p>Total: {totalFeedback}</p>
-        <p>Positive feedback: {positiveFeedbackPercentage}%</p>
+        <FeedbackOptions
+          options={statsKeys}
+          onLeaveFeedback={this.countFeedback}
+        />
+
+        <Statistics
+          statsKeys={statsKeys}
+          statsData={this.state}
+          total={totalFeedback}
+          positivePercentage={positiveFeedbackPercentage}
+        />
       </div>
     );
   }
