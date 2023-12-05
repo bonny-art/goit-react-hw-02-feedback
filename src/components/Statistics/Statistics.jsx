@@ -6,7 +6,6 @@ export const Statistics = ({
 }) => {
   return (
     <div>
-      <h2>Statistics</h2>
       {statsKeys.map(statsKey => {
         return (
           <p key={statsKey}>

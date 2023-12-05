@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Statistics, FeedbackOptions } from 'components';
+import { Section, Statistics, FeedbackOptions } from 'components';
 
 export class App extends Component {
   state = {
@@ -26,17 +26,21 @@ export class App extends Component {
 
     return (
       <div>
-        <FeedbackOptions
-          options={statsKeys}
-          onLeaveFeedback={this.countFeedback}
-        />
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={statsKeys}
+            onLeaveFeedback={this.countFeedback}
+          />
+        </Section>
 
-        <Statistics
-          statsKeys={statsKeys}
-          statsData={this.state}
-          total={totalFeedback}
-          positivePercentage={positiveFeedbackPercentage}
-        />
+        <Section title="Statistics">
+          <Statistics
+            statsKeys={statsKeys}
+            statsData={this.state}
+            total={totalFeedback}
+            positivePercentage={positiveFeedbackPercentage}
+          />
+        </Section>
       </div>
     );
   }
